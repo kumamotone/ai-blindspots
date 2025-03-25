@@ -1,34 +1,17 @@
+
 +++
-title = "Scientific Debugging"
+title = "科学的デバッグ"
 date = "2025-03-09T22:18:30-04:00"
 tags = []
 +++
 
-When there is a bug, there are broadly two ways you can try to fix it.  One
-way is to randomly try things based on vibes and hope you get lucky.  The
-other is to systematically examine your assumptions about how the system works
-and figure out where reality mismatches your expectations.  I generally think
-that the second approach of scientific debugging is better in the long run;
-even if it takes you more time to do, you will walk away with a better
-understanding of the codebase for next time.
+バグを直す方法として、大きく分けると「勘に頼って適当に直してみる」か、「系統立てて問題を切り分け、想定と実際の挙動のズレを特定する」の2種類があります。後者の科学的デバッグのほうが、手間はかかるかもしれませんが、一度しっかり理解すれば次に同様の問題が起きたときにも役立ちます。
 
-A non-reasoning model is not going to do the scientific method.  It is going
-to "guess" what the fix is, and try to one shot it.  If you are in an agent
-loop, it can rerun the test suite to see if it worked or not, and then
-randomly try things until it succeeds (but more likely, gets into a death
-loop).
+推論能力が限定的なモデルは科学的手法というより「とりあえず一発で直しに行く」スタイルです。エージェントモードであれば、テストを実行して失敗すれば別のパッチを出す、というふうに試行錯誤はできますが、多くの場合は無作為に試してループに陥るだけになるでしょう。
 
-The general word on the street is you should use a reasoning model for
-debugging (actually, people tend to prefer using models like Grok 3 or
-DeepSeek-R1 for this sort of problem).  Personally, when I do AI coding, I am
-still maintaining a pretty detailed mental model of how the code is supposed
-to work, so I think it's pretty reasonable to also try to root cause it yourself (you don't have to fix it, if you tell the model what's wrong it will usually do the right thing).
+噂では、デバッグにはより推論性能の高いモデル（Grok 3やDeepSeek-R1のようなもの）を使うとよいと言われています。個人的には、LLMにすべて任せるよりも、自分である程度原因を特定し、LLMには修正作業だけを任せるというやり方でも生産性は充分上がると感じています。「原因はここだ」と特定してあげれば、LLMはそこを修正するコードを書いてくれますし、広範囲での修正や周辺処理も併せてやってくれることがあります。
 
-## Examples
+## 例
 
-- One of the most horrifying death loops an agent LLM can get into is trying
-  to fix misconfigurations in your environment; e.g., a package is missing for
-  some reason.  One funny problem with Sonnet 3.7 is that it expects `pip` to
-  be available, which it's not in the default venv created by `uv`, and it is
-  incapable of figuring out what went wrong here, wasting a lot of tokens
-  randomly flailing around.
+- 環境構成が壊れている（あるライブラリがインストールされていない等）状態でエージェントLLMにタスクを渡すと、状況を正しく把握できず無駄な修正を繰り返して死のループに陥ることがあります。Sonnet 3.7は特に `pip` が使えると思い込む傾向が強く、実際に `pip` が存在しない仮想環境で延々と `pip install` を試し続けるといった無意味な試行を行います。
+

@@ -1,28 +1,18 @@
+
 +++
-title = "Stateless Tools"
+title = "ステートレスなツールを使おう"
 date = "2025-03-03T21:38:09-05:00"
 tags = []
 +++
 
-Your tools should be stateless: every invocation is independent from every
-other invocation, there should be no state that persists between each
-invocation that has to be accounted for when doing the next invocation.
-Unfortunately, shell is a very popular tool and it has a particulary
-pernicious form of local state: current working directory.  Sonnet 3.7 is very
-bad at keeping track of what the current working directory is.  Endeavor very
-hard to setup the project so that all commands can be run from a single
-directory.
+ツールはステートレスであるべきです。つまり、各呼び出しが他の呼び出しから独立し、呼び出し間で考慮すべき状態が存在しないのが望ましいということです。  
+残念ながら、シェルは非常によく使われるツールでありながら、ローカル状態（カレントディレクトリなど）を持ち込む厄介さがあります。Sonnet 3.7は「今どのディレクトリにいるのか」を把握するのがとても苦手です。できる限り、すべてのコマンドを単一ディレクトリから実行できるようにしておくのが理想です。
 
-Ideally, models would be tuned to prefer not to make tool commands that change
-state, even if they are available.  If state is absolutely necessary,
-continuously feeding the current state into the model could help improve
-coherence.  The RP community probably has quite a lot of lessons here.
+本当はモデルを「ステートを変化させるツールコールは避けるようにチューニング」できるといいのですが、まだ一般的ではありません。どうしても状態が必要な場合は、モデルに常に現在の状態を明示するか、または別の仕組みで管理させる必要があるでしょう。  
+ロールプレイ(RP)系コミュニティにはこのあたりの知見が豊富だと思われます。
 
-## Examples
+## 例
 
-- A TypeScript project was divided into three subcomponents: common, backend
-  and frontend.  Each component was its own NPM module.  Cursor run from the
-  root level of the project would have to cd into the appropriate component
-  folder to run test commands, and would get confused about its current
-  working directory.  It worked much better to instead open up a particular
-  component as the workspace and work from there.
+- TypeScriptプロジェクトが「common」「backend」「frontend」という3つのサブコンポーネントに分かれており、それぞれが独立したNPMモジュールでした。プロジェクトルートからCursorを起動すると、テストを実行するためにLLMは`cd`を行おうとするのですが、どのディレクトリにいるのかをうまく把握できずに混乱します。  
+  そこでフロントエンドだけをワークスペースとして開いてCursorを使うと、カレントディレクトリを気にしなくて済むので、だいぶスムーズに動きました。
+

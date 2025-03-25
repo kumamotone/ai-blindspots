@@ -1,39 +1,18 @@
+
 +++
-title = "Stop Digging"
+title = "掘り進めるのをやめよう"
 date = "2025-03-03T20:52:58-05:00"
 tags = []
 +++
 
-Outside of very tactical situations, current models do not know how to stop
-digging when they get into trouble.  Suppose that you want to implement
-feature X.  You start working on it, but midway through you realize that it is
-annoying and difficult to do because you should do Y first.  A human can know
-to abort and go implement Y first; an LLM will *keep digging*, dutifully
-trying to finish the original task it was assigned.  In some sense, this is
-desirable, because you have a lot more control when the LLM does what is
-asked, rather than what it *thinks* you actually want.
+今のLLMは、問題の途中で方向転換して「別の前提を先にやるべきだ」と気づいてタスクを中断する、ということが非常に苦手です。例えば「Xという機能を実装しよう」として着手した途中で、Yを先にやらないと無駄に手間がかかると気づいたとします。人間なら作業を中断して先にYを実装するでしょうが、LLMは指示されたタスク（X）をとにかく完遂しようと「掘り続けて」しまいます。  
+ある意味、これは制御性を高める利点にもなりえます。モデルが勝手に「実際にはYが必要だから、そっちに変えます」と指示に反して動いてしまうほうが困るケースもあるからです。
 
-Usually, it is best to avoid getting into this situation in the first place.
-For example, it's very popular to come up with a plan with a reasoning model
-to feed to the coding model.  The planning phase can avoid asking the coding
-model to do something that is ill advised without further preparation.
-Second, agentic LLMs like Sonnet will proactively load files into its context,
-read them, and do planning based on what it sees.  So the LLM might figure out
-something that it needs to do without you having to tell it.
+結局、こうした事態を防ぐには最初から計画を立てるほうがよいという話になります。例えば、高度な推論のできるモデルで計画を立案し、それをコーディング用モデルに実行させるとか。また、Sonnetのエージェントモードではモデルがファイルを参照し計画を立てるので、ある程度は自律的に必要事項に気づいてくれる場合もあります。
 
-Ideally, a model would be able to realize that "something bad" has happened,
-and ask the user for request.  Because this takes precious context, it may be
-better for this detection to happen via a separate watchdog LLM instead.
+理想的には、モデルが「これは無理筋だ」と判断できたらユーザに確認を仰ぐという流れがあればいいのですが、それを組み込みでやるには（コンテキストを多く消費してしまうなど）課題が残ります。別途「ウォッチドッグ的なLLM」を置いて検知させるなどのアイデアが考えられます。
 
-## Examples
+## 例
 
-- After having made some changes that changed random numbers sampling on a
-  Monte Carlo simulation, I asked Claude Code to fix all of the tests, some of
-  which were snapshots on exact random sampling strategy.  However, it turns
-  out that the new implementation was nondeterministic at test time, so the
-  tests would nondeterministically pass/fail depending on sampling.  Claude
-  Code was incapable of noticing that the tests were flipping between
-  passing/failing, and after unsuccessfully trying to bash the tests into
-  passing, started greatly relaxing the test conditions to account for
-  nondeterminism, instead of proposing that we should refactor the simulation
-  to sample deterministically.
+- 乱数を使うモンテカルロシミュレーションの実装を変更したため、テストが不安定になりました。それらを通そうとLLM（Claude Code）に頼んだところ、確率的にテストが通らないことを理解できず、テスト側の条件をどんどん緩めて最終的にすべて通るようにする、という方向に進んでしまいました。「乱数生成をテスト時には固定シードにする」という本来の修正案にはたどり着けませんでした。
+

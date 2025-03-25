@@ -1,28 +1,16 @@
+
 +++
-title = "Black Box Testing"
+title = "ブラックボックステスト"
 date = "2025-03-03T21:18:37-05:00"
 tags = []
 +++
 
-Black box testing says that you should test the functionality of a component
-without knowing its internal structure.  By default, LLMs have difficulty
-abiding with this, because by default the implementation file will be put into
-the context, or the agent will have been tuned to pull up the implementation
-to understand how to interface with it.  Sonnet 3.7 in Cursor also has a
-strong tendency to try to make code consistent, which that it will try to
-eliminate redundancies from the test files, even though black box testing
-suggests it is better to keep the redundancy to avoid reflecting bugs from the
-implementation directly in the test.
+ブラックボックステストとは、コンポーネントの内部構造を知らない状態で、その機能をテストすべきだという考え方です。  
+デフォルトの状態では、LLM（大規模言語モデル）はこれを遵守するのが難しくなりがちです。というのも、実装ファイルがコンテキストに含まれるか、あるいはエージェントが実装を引き出してインターフェイスの仕方を理解しようとするようにチューニングされているからです。Cursor の Sonnet 3.7 はコードを一貫性のあるものにしようと強く働きかける傾向があり、実装ファイルとテストファイルで重複している部分（本来はブラックボックステスト的に独立させたままが望ましい冗長性）を排除してしまうことがあります。
 
-Ideally, it would be possible to mask out or summarize implementations when
-loading files into the context, to avoid overfitting on internal
-implementation details that should be hidden.  It would be necessary for the
-architect to specify what the information hiding boundaries are.
+理想的には、コンテキストにファイルを読み込む際に実装をマスクしたり要約したりできるとよいでしょう。そうすることで、ブラックボックスとしてテストすべき内部実装の詳細に引きずられないようにできます。これには、アーキテクトが情報隠蔽の境界を明示的に指定する必要があります。
 
-## Examples
+## 例
 
-- I asked Sonnet 3.7 in Cursor to fix a failing test.  While it made the
-  necessary fix, it also updated a hard-coded expected constant to instead be
-  computed using the same algorithm as the original file, instead of
-  preserving the constant as the test was originally written.  See also
-  [Preparatory Refactoring]({{< relref "preparatory-refactoring.md" >}}).
+- Sonnet 3.7（Cursor上）に壊れているテストを修正するよう依頼したところ、必要な修正は行ったものの、ハードコーディングされていた期待値の定数を削除し、代わりに実装ファイルと同じアルゴリズムを使って計算するように書き換えてしまいました。本来テストでは定数を保持し、実装の変更がテストコードに影響しないようにしておくべきです。詳しくは[準備的リファクタリング]({{< relref "preparatory-refactoring.md" >}})を参照してください。
+

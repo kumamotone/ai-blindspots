@@ -1,18 +1,14 @@
+
 +++
-title = "Walking Skeleton"
+title = "ウォーキングスケルトン"
 date = "2025-03-06T10:38:01-05:00"
 tags = []
 +++
 
-The [Walking Skeleton](https://wiki.c2.com/?WalkingSkeleton) is the minimum,
-crappy implementation of an end-to-end system that has all of the pieces you
-need.  The point is to get the end-to-end system working first, and only
-*then* start improving the various pieces.  I can still remember [Jacob
-Steinhardt](https://jsteinhardt.stat.berkeley.edu/) telling me about this
-trick while I was a PhD student at Stanford, and it has stuck with me ever
-sense.
+[ウォーキングスケルトン](https://wiki.c2.com/?WalkingSkeleton)とは、E2Eですべてのパーツを含む、最小限の動く仕組みをまず作り上げる、というプラクティスです。欠点だらけでもいいので、まず全体を通して動く状態を手に入れてから、各部分を本格的に強化・改善していきます。スタンフォードのPhD時代にJacob Steinhardtに教わった手法ですが、今でも非常に有効だと感じています。
 
-In the era of LLM coding, it has never been easier to get the entire system
-working.  By using the system, it becomes obvious what the next steps should
-be.  Get to that point as soon as possible.  The LLM can't dogfood the code it
-writes!
+LLMコーディングが普及した現在、エンドツーエンドの動くものを用意するハードルは格段に下がりました。一旦最後まで通して動かしてみると、「次に何が必要か」が自明になるからです。まずは動く状態までもっていきましょう。LLMは自分で生成したコードを「自分で使う」ことはできませんが、あなたは動く実装を触って、必要な追加要件を把握したり、それをLLMに再度指示したりできます。
+
+## 例
+
+- 「まず全体が動く」ことを優先することで、どの部分を優先的に修正・改善すべきかが明確になります。LLMを使えば、初期段階のパイプライン構築も素早く形にできるでしょう。

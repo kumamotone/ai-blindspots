@@ -1,28 +1,15 @@
+
 +++
-title = "Know Your Limits"
+title = "限界を知ろう"
 date = "2025-03-12T11:43:35-04:00"
 tags = []
 +++
 
-It is important to know when you are out of your depth or you don't have the
-tools available to do your job, so you can escalate and ask for help.
+自分の手に負えないときや、必要なツールが手元にないときにはヘルプを求めるべきです。
 
-Sonnet 3.7 is not very good at knowing its limits.  If you want it to tell you
-when it doesn't know how to do something, at minimum you will have to
-explicitly prompt it (for example, Sonnet's system prompt instructs it to
-explicitly warn a user about hallucinations if it is being asked about a very
-niche topic.)  It is very important to only ask the LLM to do things that it
-actually can do, especially when it's an agent.
+Sonnet 3.7は自分の限界をあまり理解できません。もし「わからないことがあれば教えてほしい」とLLMに明示的に指示していなければ（たとえばSonnetのシステムプロンプトでは、ニッチな話題について質問された場合は幻覚を警告するように明示的に指示している）、LLMは知らないことでもあたかも知っているかのように回答してしまいます。特にエージェント的な利用をする場合、「LLMが実際にできないこと」を実行させようとすると、暴走して使えないコマンドを乱発してしまうおそれがあります。
 
-## Examples
+## 例
 
-- Sonnet 3.7 deeply, deeply believes that it has the capability to make shell
-  calls.  If you are doing agentic coding and there is no bash command
-  available, if Sonnet decides that it needs to make a file executable, it
-  will start creating random shell scripts on your filesystem to try in some
-  weird proxy of the thing they actually wanted to do.  It's common for Sonnet
-  to say, "I am going to do X" and then generate a tool call for Y, which is
-  totally different.  The best thing to do in this situation is to improve the
-  prompt (not perfect, Sonnet will forget) or just give Sonnet a tool that
-  does the thing it wants to do (a specific tool that does one thing will
-  prevent Sonnet from trying to do a generic bash call.)
+- Sonnet 3.7はしきりに自分にシェルコマンドを実行する能力があると思い込んでいます。エージェントコーディングを行う際に、シェルコマンドを用意していない環境で「ファイルを実行可能にしたい」とLLMが考えると、本来やりたい操作の代わりに無関係なシェルスクリプトを作って実行しようとすることがあります。しばしば「Xをやる」と言ってツール呼び出しはYになる、といったズレが起きます。ベストな対処は、プロンプトを調整したり、LLMがやろうとしているタスクをピンポイントで実現できるツールを与えて、やりたいことを正しく実行できるようにすることです。
+

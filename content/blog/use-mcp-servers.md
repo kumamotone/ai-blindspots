@@ -1,51 +1,23 @@
+
 +++
-title = "Use MCP Servers"
+title = "MCPサーバを使おう"
 date = "2025-03-06T11:18:04-05:00"
 tags = []
 +++
 
-Model Context Protocol servers provide a standard interface for LLMs to
-interact with their environment.  Cursor Agent mode and Claude Code use agents
-extensively.  For example, instead of needing a separate RAG system (e.g., as
-previously provided by Cursor) to find and feed the model relevant context
-files, the LLM can instead call an MCP which will let it lookup what files it
-wants to look at before deciding what to do.  Similarly, a model can run tests
-or build and then immediately work on fixing problems when this occurs.  It is
-clear that Anthropic's built-in MCP servers are useful, and you should use
-agent mode when you can.
+Model Context Protocol (MCP)サーバは、LLMが開発環境とやり取りするための標準的なインターフェースを提供するものです。CursorのエージェントモードやClaude Codeでは、この仕組みを多用しています。たとえば、RAGシステムの代わりにMCPを使って「どのファイルを読み込むか」をLLM自身に選ばせたり、テストやビルドを実行させたり、その結果を受けてさらに修正を行う、といった流れが自然に実現できます。  
+AnthropicのMCPサーバは非常に便利なので、対応している場合はエージェントモードを使うとよいでしょう。
 
 ----
 
-Epistemic status: this next section is theoretical, I have not attempted it in
-practice yet.
+以下はまだ試したことのない理論的な話になりますが、
 
-A further question to ask is whether or not you should be writing your own MCP
-servers.  One of the built-in MCP servers is a shell, so in practice you can
-turn on YOLO mode in Cursor and add some instructions to your Cursor rules
-about what commands to run and this actually works reasonably well.  But it's
-really dangerous!  Arbitrary shell commands can do anything, and there are
-plenty of shell commands in your LLMs pretraining set that will trash your
-environment.  So you are mostly praying that your LLM doesn't go off the rails
-some day (or you're a careful user and audit every command before running
-them--let's be real, who's got time for that).
+さらに進んで独自のMCPサーバを書くことはできるでしょうか？  
+たとえば標準で備わっているMCPコマンドとしてシェルが利用できれば、CursorのYOLOモードのように何でもコマンドを実行できるようにできます。しかしこれは非常に危険です。任意のシェルコマンドを実行できる状態だと、LLMが環境を破壊するコマンドを実行しかねません（もちろん都度レビューすればいいのですが、現実的には大変です）。  
+一方で、自分が意図する範囲のコマンドのみを実行可能なMCPサーバを用意すれば、より安全にツールを利用させることができます。しかし、2025年3月時点ではCursorがそれを柔軟に差し替える仕組みを十分に提供しているとは言えません。現状は「プラットフォーム全体で使える汎用的なMCP」を提供する方向が強く、「プロジェクト固有の `npm run` コマンド」だけをMCPサーバとして実装する、といった使い方はやや特殊な印象です。
 
-The alternative is to write an MCP server that exposes the commands that you
-want your model to have access to (note, this is a bit different from what
-most people are thinking of when they write MCPs to access various existing
-platform APIs).  In principle, this should make it easier to control what
-tools actually end up getting called, but as of March 2025 support for this in
-Cursor is poor.  In particular, there is no direct way to have different MCP
-servers on a per project basis, and the overall direction the ecosystem is
-going with MCP servers are to provide tools that are universally applicable,
-rather than the equivalent of `npm run` as an MCP server.
+## 例
 
-## Examples
+- TypeScriptプロジェクトで型チェック (`tsc`) を実行させ、エラーが出たら直すというタスクをエージェントモードでLLMにさせる場合、MCPで実際に型チェックを実行し、その結果をモデルに返すことができます。モデルはその情報を元に、他のファイルの修正を行うかどうかを判断できます。  
+  ただし、プロンプト次第ではLLMが `npm run typecheck` のようなコマンドを勝手に想像してしまう場合があるので、Cursor rulesやMCPで明示的に正しいコマンドを教えてあげるとよりスムーズに動くでしょう。
 
-- When I ask Sonnet 3.7 to typecheck a TypeScript project and fix errors, in
-  agent mode it will use MCP to run the command, get the output, and decide
-  what to do from there.  There is much more convenient than having to
-  manually copy paste terminal output into the chat window.  It's important to
-  prompt this appropriately (either in Cursor rules, or via an MCP), as the
-  LLM is prone to hallucinating what command you should run.  For example, in
-  my case, by default it hallucinates `npm run typecheck`, which on this
-  project did not work.

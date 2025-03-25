@@ -1,35 +1,17 @@
+
 +++
-title = "Culture Eats Strategy"
+title = "カルチャーが戦略を食べる"
 date = "2025-03-12T22:56:14-04:00"
 tags = []
 +++
 
-Culture Eats Strategy (For Breakfast) says no matter how good your strategy
-is, the culture of your team isn't capable of executing it.  If your problem
-is execution, look to change the culture instead of trying to come up with
-increasingly elaborate strategies.
+「Culture Eats Strategy (For Breakfast)」とは、どれほど優れた戦略であっても、チームのカルチャー（文化）がそれを実行できなければ意味がない、という格言です。もし問題の本質が「実行力の不足」であれば、戦略をさらに凝ったものにするより、まずはチームのカルチャーを変えることを検討すべきです。
 
-By default, your LLM lives in a certain part of the "latent space":  when you
-ask it to generate code, it will generate it with a style that is based off of
-how it was fine tuned, as well as its context window up until the point (this
-includes the system prompt as well as any files it's read into the context.)
-This style is self-reinforcing: if a lot of the text in the context window
-that uses a library, the LLM will continue to use that library--conversely, if
-the library is not mentioned at all and the LLM is not fine-tuned to reach for
-it by default, it will not use it (there are exceptions, but this is a reasonably
-good description of how Sonnet 3.7 will behave.)
+デフォルトでは、あなたが使っているLLMは特定の「潜在空間」の一部に存在しています。コード生成をお願いすると、その出力されるスタイルは、LLMがファインチューニングされた内容や、コンテキストウィンドウ（システムプロンプトや読み込まれたファイル）に基づいて決まります。そしてこのスタイルは自己強化的に働きます。もし、コンテキストウィンドウで使われているライブラリのコードが大量にあれば、LLMは引き続きそのライブラリを使い続けようとします。逆に、そのライブラリがまったく言及されていなかったり、ファインチューニング設定でデフォルト採用されるような記述がされていなければ、LLMはそのライブラリを使わない可能性が高いです（例外はありますが、Sonnet 3.7における挙動をざっくり言えばこんな感じです）。
 
-If the LLM is consistently doing things you don't like, you need to change its
-culture: you need to put it in a different part of the latent space.  This
-could be adding a rule to your Cursor rules (modifying the prompt), but it can
-also be refactoring existing code to follow the style you want the LLM to
-follow, since LLMs are trained to predict the next token in context.  The
-fine-tune, the prompt and the codebase are the culture.  One you can't change,
-and the codebase is a lot bigger than the prompt and ultimately will have a
-dominating effect.
+もしLLMがいつも好ましくないコードを書いてしまうなら、その「カルチャー」を変えてしまう必要があります。つまり、LLMを「潜在空間」の別の部分に置く必要があるということです。これにはCursor rules（プロンプト）の変更が考えられますし、既存のコードベースをリファクタリングして、自分たちが望むスタイルに統一するというアプローチもあります。LLMはコンテキスト内のトークン列を予測しようとするため、提示されるコードベース自体が「文化」になるわけです。ファインチューニングやプロンプトで制御できることもありますが、最終的には大きなコードベースのスタイルが、LLMのスタイルを支配していきます。
 
-## Examples
+## 例
 
-- Sonnet 3.7's house style is to prefer synchronous over asynchronous Python.
-  To get it to reliably write new code using async, it was necessary to force
-  it to port most of the existing code in my codebase to be async.
+- Sonnet 3.7がPythonで同期コードを好む場合に、非同期コードを安定して書かせるには、既存コードの大部分をasyncに書き換える必要がありました。
+

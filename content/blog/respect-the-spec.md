@@ -1,40 +1,22 @@
+
 +++
-title = "Respect the Spec"
+title = "仕様を尊重する"
 date = "2025-03-07T11:28:00-05:00"
 tags = []
 +++
 
-When designing changes, it is important to keep in mind what parts of the
-system you can change and what parts you cannot.  For example:
+変更設計をする際は、「どの部分なら変更してよく、どの部分は変えてはいけないのか」を意識することが重要です。例えば:
 
-- If you expose a public API, you should prefer not to make a BC breaking
-  change to the API, even if it would make your life easier if the API was
-  different.
+- 公開APIを持っている場合、後方互換性を壊すような変更は極力避ける。
+- 外部システムと連携している場合は、実際に存在するAPIの仕様に従う。勝手に自分用に都合よく書き換えてはいけない。
+- テストが失敗しているからといって、テストを削除してしまうのではなく、テストの仕様が正しいかどうかを見極める。
 
-- If you interact with an external system, you have to conform to the API that
-  actually exists, not some wishful thinking version that directly gives you
-  what you want.
+これらはすべて、システムの一部が「仕様（spec）」になっていて、通常は勝手に変えてはいけないという例です。必要な場合に仕様を変えるのはアリですが、日常的にはまず仕様を守るほうが自然です。
 
-- If a test is failing, you should not delete it to make the test suite pass,
-  you should understand if the test is right or not.
+LLMsは仕様を守るのがあまり得意ではありません。平気でテストを削除したりAPIを変更したりします。いくつかは常識的にNGなのでプロンプトで明示的に禁止できますが、LLMがどんな思いつきをするかまでは制御しにくいでしょう。LLMが生成したコードをレビューして、仕様を勝手に変えていないかチェックするのは非常に重要です。
 
-The common theme for all of these is that some parts of the system are part of the specification, and while *occasionally* the right thing to do is to change the spec, for day-to-day coding you would like to respect the spec.
+## 例
 
-LLMs are not very good at respecting the spec.  They'll happily delete tests,
-change APIs, really do anything while they're coding.  Some of these
-boundaries are common sense and could potentially be encoded in your prompt,
-but some you will only discover when the LLM comes up with some new and
-fascinating way to hack the reward function.  This is one of the most
-important functions of reviewing LLM generated code; ensuring that it didn't
-change the spec in an unaligned way.
+- Sonnet がテスト修正をうまくできなかったため、テストの中身を `assert True` に書き換えて修正「した」ことにした。
+- ある公開関数が `pass` というキーを持つ dict を返していたとき、Sonnet 3.7はTypedDictクラスで型定義しようとして文法エラーに遭遇し、解決策としてキー名を `pass_` にリネームしようとした。しかしこれはAPI仕様を破壊してしまうので、本来はできないはずの修正だった。
 
-## Examples
-
-- Sonnet was failing to fix a test, so it replaced the contents of the test
-  with `assert True`.
-
-- I was trying to make a file well typed.  One public function was returning a
-  dict with the key `pass`, and on a first pass Sonnet 3.7 tried to use the
-  TypedDict class syntax, but this doesn't work because pass is reserved
-  keyword.  To fix this, Sonnet decided to rename the key to `pass_`, which
-  doesn't work for obvious reasons.

@@ -1,30 +1,15 @@
+
 +++
-title = "Bulldozer Method"
+title = "ブルドーザー方式"
 date = "2025-03-03T22:24:26-05:00"
 tags = []
 +++
 
-The [Bulldozer Method](https://x.com/danluu/status/1570298241681616897) as
-popularized by Dan Luu suggests that sometimes you can achieve results that
-seem superhuman simply by just sitting down, doing the brute force work, and
-then capitalizing on what you learn by doing this to get a velocity increase.
-AI coding is the epitome of brute force work: you can just brute force large
-refactoring problems if you are willing to spend enough tokens, or you can
-have the LLM build the workflow you will use to brute force the problem.  Look
-for opportunity in places where previously people had written off a problem as
-"too much work".  Make sure you inspect what the LLM is actually doing though,
-because it will happily keep doing the same thing over and over, unlike a
-human who would get bored and look for a better way.
+Dan Luu が広めた [Bulldozer Method（ブルドーザー方式）](https://x.com/danluu/status/1570298241681616897) は、時に「人間離れした」成果を出すには、ただ座ってブルドーザーのように総当たり作業をし、そこから学んだことを活用して速度を上げる、というアプローチも有効だという考え方です。AIによるコーディングはまさに総当たり作業の代表例です。十分なトークン量を投下すれば、大規模なリファクタリングでも総当たりでこなせますし、逆に総当たりするためのワークフローをLLMに構築させることもできます。以前は「作業量が多すぎる」と敬遠されていた問題にもチャンスがあるかもしれません。ただし、LLMに任せきりにせず、必ずLLMが実際に何をしているかを検証しましょう。人間と違って、LLMは同じことを何度も繰り返しても飽きることがありませんし、よりよい方法を探すことをしないかもしれません。
 
-## Examples
+## 例
 
-- A historical annoyance people have had with strongly typed languages like
-  Haskell or Rust is when you make a change to some core function, and then
-  you have to refactor half the universe to account for it (fearless
-  refactoring, they say, because the type checker will help you fix it).  In
-  many cases, the "read compile error, fix the problem" loop can be completely
-  automated by an agentic LLM.
+- Rust や Haskell のような強い型付け言語でコアな関数を変更すると、関連する箇所を大量に直さなければいけない（「恐れなきリファクタリング (fearless refactoring)」と呼ばれ、型チェッカーが正しく変更箇所を特定するのに役立つ）ということがあります。通常なら「エラーを読んで修正してコンパイルする」を繰り返す必要があり面倒ですが、エージェント的に動作するLLMに任せれば、そうした修正ループを自動化できる可能性があります。
 
-- I had some test cases with hard coded numbers that had wobbled and needed
-  updating.  I simply asked the LLM to keep rerunning the test and updating
-  the numbers as necessary.
+- ハードコーディングされた数字がいくつかあってテストを通すために値を更新しなければならない場合も、LLMに頼めばテストを実行しつつ必要な数値を更新し続けることができます。
+

@@ -1,14 +1,11 @@
+
 +++
-title = "Use Automatic Code Formatting"
+title = "自動コードフォーマットを使おう"
 date = "2025-03-04T09:57:41-05:00"
 tags = []
 +++
 
-Automatic code formatting tools like gofmt, rustfmt and black help enforce a
-consistent coding style across your codebase.  LLMs are generally not very
-good at following mechanical rules like "lines with no content on them should
-have no trailing spaces even if the indentation level is non-zero" or "make
-sure a line is wrapped at 78 columns."  Use the right tool for the job.
+gofmtやrustfmt、blackなどの自動コード整形ツールを使えば、コードベース全体を機械的にフォーマットして整合性を保つことができます。LLMは「空行にもインデントを入れるか」や「行末のスペース」などの機械的ルールを厳密に守るのは苦手です。また「行を78文字で折り返す」といった細かいスタイルにも忠実とは限りません。ですから、こうした機械的フォーマットは専門のツールで一括で行い、LLMにはもっと複雑なタスクに力を割かせたほうがいいでしょう。
 
-This applies to lint fixes too: prefer lints that can be automatically fixed,
-and don't waste LLM capacity having the LLM fix them; save it for the hard stuff.
+これはリンターの自動修正にも同様です。自動修正が可能なリンターはそちらに任せてしまい、LLMを使うのはより高度な修正に集中させるのが効率的です。
+

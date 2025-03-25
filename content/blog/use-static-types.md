@@ -1,21 +1,13 @@
+
 +++
-title = "Use Static Types"
+title = "静的型を使おう"
 date = "2025-03-06T10:42:57-05:00"
 tags = []
 +++
 
-The eternal debate between dynamic and static type systems concerns the
-tradeoff between ease of prototyping and long term maintainability.  The rise
-of LLMs greatly reduces the pressure to choose a language that is good at
-prototyping, since the LLM can cover up for boilerplate and refactors.  Choose
-accordingly.  You will want an agent setup where the LLM is informed about
-type errors after changes they make, so they can easily tell what other files
-they need to update when doing refactors.  Be careful about your token costs.
+動的型言語と静的型言語の選択は、プロトタイピングのしやすさとメンテナンス性のトレードオフとして昔から議論があります。LLMの台頭によって、「ボイラープレートやリファクタリングの手間が少ない言語を選ぶ」必要性は以前ほど大きくなくなりました。LLMが定型的な修正や大量のリファクタリングを自動化してくれるからです。ですから、いままでより静的型言語を優先して選択してもよいかもしれません。エージェント構成でLLMに型エラーを報告し、関連ファイルを一括修正させることも簡単になります。ただし、そのぶんトークンコストも増えるので要注意です。
 
-Unfortunately, the training corpus highly emphasizes Python and JavaScript.
-Their typed offerings are workable, but as both are gradual type systems you
-will need to carefully setup the typechecker settings to be strict (or
-carefully prompt your LLM to setup the settings properly).
+しかし、学習データの主要部分がPythonとJavaScriptに偏っているため、LLMはこれらの言語を好む傾向があります。TypeScriptやPythonのtypingは「段階的型付け」であり、実際に厳格設定にするかどうかはプロジェクト次第です。LLMにも適切に指示しないと、中途半端な型定義しか付けられない場合があります。
 
-In principle, Rust should be a good target language for LLMs.  However, LLMs
-are not as good at generating Rust as they are for Python/JavaScript.
+Rustであれば、より厳格で堅牢な型システムが得られますが、Rustコード生成においてはPythonやJavaScriptほどLLMが熟知していないことが多いようです。
+

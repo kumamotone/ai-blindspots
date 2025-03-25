@@ -1,29 +1,15 @@
+
 +++
-title = "Read the Docs"
+title = "ドキュメントを読もう"
 date = "2025-03-04T23:11:23-05:00"
 tags = []
 +++
 
-When you're learning to use a new framework or library, simple uses
-of the software can be done just by copy pasting code from tutorials
-and tweaking them as necessary.  But at some point, it's a good idea to just
-slog through reading the docs from top-to-bottom, to get a full understanding of what is and is not possible in the software.
+新しいフレームワークやライブラリを使うとき、簡単なサンプル程度であればチュートリアルのコードをコピーして少し変えるだけでも動くでしょう。ですが、ある程度込み入った使い方をするなら、最終的には公式ドキュメントを最初から最後まで読んだほうが理解が深まり、後々役に立ちます。
 
-One of the big wins of AI coding is that LLMs know so many things from their
-pretraining.  For extremely popular frameworks that occur prominently in the
-pretraining set, an LLM is likely to have memorized most aspects of how to use
-the framework.  But for things that are not so common or beyond the knowledge
-cutoff, you will likely get a model that hallucinates things.  Ideally, an
-agentic model would know to do a web search and find the docs it needs.
-However, Sonnet does not currently support web search, so you have to manually
-feed it documentation pages as needed.  Fortunately, Cursor makes this very
-convenient: simply dropping a URL inside a chat message will include its
-contents for the LLM.
+AIコーディングによって、LLMはあらかじめ膨大な事前学習をもとに「人気フレームワーク」の使い方をだいたい覚えていることがあります。しかし、あまり知られていないものや学習データの範囲外にあるものについては、LLMが「幻覚」してしまうことが珍しくありません。理想的には、エージェント的なモデルがウェブ検索してドキュメントを見つけ、そこから正しく使えるようにするのが望ましいですが、Sonnet 3.7 にはウェブ検索機能がありません。したがって、必要なドキュメントページは手動でモデルに与える必要があります。CursorではURLをチャット中に貼るだけで内容を取り込めるため比較的簡単です。
 
-## Examples
+## 例
 
-- I was trying to use the LLM to write some YAML that configured to call a
-  Python function to do some evaluation.  Initially, the model hallucinated
-  how this hookup should work.  After providing the manual as context the
-  model understood how to fix the error and also updated the output format of
-  its function to match the documentation guidance.
+- あるツールのYAML設定でPython関数を実行するように書こうとしたところ、LLMが使用法を幻覚しました。そこでマニュアルをコンテキストに渡したら、モデルは誤りを修正し、出力フォーマットもドキュメント推奨の形に合わせて修正してくれました。
+

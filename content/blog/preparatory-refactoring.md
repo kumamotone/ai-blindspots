@@ -1,35 +1,16 @@
+
 +++
-title = "Preparatory Refactoring"
+title = "準備的リファクタリング"
 date = "2025-03-03T21:24:52-05:00"
 tags = []
 +++
 
-[Preparatory Refactoring](https://martinfowler.com/articles/preparatory-refactoring-example.html)
-says that you should first refactor to make a change easy, and then make the
-change.  The refactor change can be quite involved, but because it is
-semantics preserving, it is easier to evaluate than the change itself.
+[Preparatory Refactoring](https://martinfowler.com/articles/preparatory-refactoring-example.html)（準備的リファクタリング）とは、「変更を容易にするためにまずリファクタリングを行い、その後で本命の変更を行う」という手法です。リファクタリングはコードの意味を変えないため、その結果を評価しやすいというメリットがあります。
 
-Current LLMs, without a plan that says they should refactor first, don't
-decompose changes in this way.  They will try to do everything at once.  They
-also sometimes act a bit too much like that overenthusiastic junior engineer
-who has taken the Boy Scout principle too seriously and keeps cleaning up
-unrelated stuff while they're making a change.  Reviewing LLM changes is
-important, and to make review easy, all of the refactors should happen ahead
-of time as their own proposed changes.
+現在のLLMは、明示的な指示がないと「まずリファクタリングをしてから次のステップへ進む」といった段階的アプローチを自主的に取ってくれるわけではありません。何も言わなければ一度にすべてをやろうとします。また、LLMはしばしば「熱心すぎる新人エンジニア」のように関連性の薄い箇所までどんどん手を入れ、「ボーイスカウト原則（少しでも綺麗にしてから去れ）」を過度に実践しようとすることがあります。レビューの観点では、リファクタリングと本質的変更を同時に行われると、どこが何のための変更か把握しづらくなります。  
+そこで、LLMには不要なリファクタリングをしないよう強く指示する（ただしCursor Sonnet 3.7は指示の遵守がそこまで得意ではありませんが）か、もしくはLLMが着手すると見込まれるコードを先にこちらでリファクタリングしておき、後から本命の変更を行わせる、といった運用が考えられます。また「常に型アノテーションを付けろ」といった形でLLMを指導している場合、それが余計なリファクタリングを誘発する場合もあります。LLMにどの範囲のコードを触らせるかを明確化すると改善するかもしれません。
 
-Ideally, the LLM would be instructed to not do irrelevant refactors (NB:
-anecdotally, Cursor Sonnet 3.7 is not great at instruction following, so this
-doesn't work as well as you'd hope sometimes).  Alternately, a pre-pass on the
-code the LLM expects to touch potentially should be done to give the LLM a
-chance to do whatever refactoring it wants to do before it actually makes its
-change.  Sometimes, context instructing the model to do good practices (like
-making code have explicit type annotations) can make this problem worse, since
-arguably the model was instructed to add annotations.  Accurately determining
-the span of code the LLM should edit could also help.
+## 例
 
-## Examples
+- インポートエラーを修正してほしいとLLMに依頼したところ、インポート修正だけでなく、未アノテーションのラムダに型をつけるなど関係のないリファクタリングも勝手に行い、しかもその型アノテーションに誤りがあり、以後エージェントループが泥沼化してしまいました。
 
-- I instructed an LLM to fix an import error from local changes I made in a
-  file, but after fixing the imports it also added type annotations to some
-  unannotated lambdas in the file.  Adding insult to injury, it did one of the
-  annotations incorrectly, leading to an agent loop spiral.
