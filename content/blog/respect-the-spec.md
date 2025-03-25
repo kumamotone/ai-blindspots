@@ -1,6 +1,7 @@
 
 +++
 title = "仕様を尊重する"
+slug = "respect-the-spec"
 date = "2025-03-07T11:28:00-05:00"
 tags = []
 +++

@@ -1,6 +1,7 @@
 
 +++
 title = "ステートレスなツールを使おう"
+slug = "stateless-tools"
 date = "2025-03-03T21:38:09-05:00"
 tags = []
 +++

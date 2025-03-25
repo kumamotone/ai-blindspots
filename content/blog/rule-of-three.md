@@ -1,6 +1,7 @@
 
 +++
 title = "3回目の法則"
+slug = "rule-of-three"
 date = "2025-03-13T14:02:33-04:00"
 tags = []
 +++

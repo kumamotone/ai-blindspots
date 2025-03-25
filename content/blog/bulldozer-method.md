@@ -1,6 +1,7 @@
 
 +++
 title = "ブルドーザー方式"
+slug = "bulldozer-method"
 date = "2025-03-03T22:24:26-05:00"
 tags = []
 +++

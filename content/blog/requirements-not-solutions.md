@@ -1,6 +1,7 @@
 
 +++
 title = "要件をまず示し、解法ではなく要件を語れ"
+slug = "requirements-not-solutions"
 date = "2025-03-03T22:45:39-05:00"
 tags = []
 +++

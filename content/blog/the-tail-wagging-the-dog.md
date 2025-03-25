@@ -1,6 +1,7 @@
 
 +++
 title = "しっぽが犬を振り回す"
+slug = "the-tail-wagging-the-dog"
 date = "2025-03-10T10:15:50-04:00"
 tags = []
 +++

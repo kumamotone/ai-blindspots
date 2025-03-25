@@ -1,6 +1,7 @@
 
 +++
 title = "MCPサーバを使おう"
+slug = "use-mcp-servers"
 date = "2025-03-06T11:18:04-05:00"
 tags = []
 +++

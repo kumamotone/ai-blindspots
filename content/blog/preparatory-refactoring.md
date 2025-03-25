@@ -1,6 +1,7 @@
 
 +++
 title = "準備的リファクタリング"
+slug = "preparatory-refactoring"
 date = "2025-03-03T21:24:52-05:00"
 tags = []
 +++

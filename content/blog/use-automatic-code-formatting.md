@@ -1,6 +1,7 @@
 
 +++
 title = "自動コードフォーマットを使おう"
+slug = "use-automatic-code-formatting"
 date = "2025-03-04T09:57:41-05:00"
 tags = []
 +++

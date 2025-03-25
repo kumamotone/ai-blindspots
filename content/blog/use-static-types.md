@@ -1,6 +1,7 @@
 
 +++
 title = "静的型を使おう"
+slug = "use-static-types"
 date = "2025-03-06T10:42:57-05:00"
 tags = []
 +++

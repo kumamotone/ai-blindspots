@@ -1,6 +1,7 @@
 
 +++
 title = "ミザン・プラス"
+slug = "mise-en-place"
 date = "2025-03-06T22:25:53-05:00"
 tags = []
 +++

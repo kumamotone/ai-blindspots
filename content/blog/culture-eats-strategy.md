@@ -1,6 +1,7 @@
 
 +++
 title = "カルチャーが戦略を食べる"
+slug = "culture-eats-strategy"
 date = "2025-03-12T22:56:14-04:00"
 tags = []
 +++

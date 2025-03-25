@@ -31,7 +31,7 @@ svg {
   <path d="M75,112 Q100,107 125,112" fill="none" stroke="var(--stroke-color)" stroke-width="1"/>
 </svg>
 
-Blindspots in LLMs I've noticed while AI coding. Sonnet family emphasis.  Maybe I will eventually suggest Cursor rules for these problems.
+AIコーディング中に気づいたLLMの盲点について。Sonnetファミリーを中心に取り上げています。  もしかすると、これらの問題に対応するためのCursorルールを提案するかもしれません。
 
 {{< recent-links >}}
 

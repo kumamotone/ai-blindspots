@@ -1,6 +1,7 @@
 
 +++
 title = "ウォーキングスケルトン"
+slug = "walking-skeleton"
 date = "2025-03-06T10:38:01-05:00"
 tags = []
 +++

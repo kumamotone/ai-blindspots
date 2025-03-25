@@ -1,6 +1,7 @@
 
 +++
 title = "限界を知ろう"
+slug = "know-your-limits"
 date = "2025-03-12T11:43:35-04:00"
 tags = []
 +++

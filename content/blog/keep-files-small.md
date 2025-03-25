@@ -1,6 +1,7 @@
 
 +++
 title = "ファイルを小さく保つ"
+slug = "keep-files-small"
 date = "2025-03-04T10:17:02-05:00"
 tags = []
 +++

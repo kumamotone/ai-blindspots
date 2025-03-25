@@ -1,6 +1,7 @@
 
 +++
 title = "ブラックボックステスト"
+slug = "black-box-testing"
 date = "2025-03-03T21:18:37-05:00"
 tags = []
 +++

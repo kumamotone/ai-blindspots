@@ -1,6 +1,7 @@
 
 +++
 title = "科学的デバッグ"
+slug = "scientific-debugging"
 date = "2025-03-09T22:18:30-04:00"
 tags = []
 +++
