@@ -36,3 +36,5 @@ AIコーディング中に気づいたLLMの盲点について。Sonnetファミ
 {{< recent-links >}}
 
 This site is made with [Hugo ʕ•ᴥ•ʔ Bear](https://github.com/janraasch/hugo-bearblog/).
+
+This page was forked from ezyang/ai-blindspots and translated for learning purposes. If you have any issues, please contact x.com/kumamotone.
