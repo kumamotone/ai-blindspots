@@ -1,4 +1,4 @@
-baseURL = 'https://ezyang.github.io/ai-blindspots/'
+baseURL = 'https://ai-blindspots-ja.netlify.app/'
 languageCode = 'en-us'
 title = 'AI Blindspots'
 theme = 'hugo-bearblog'

@@ -30,6 +30,6 @@
 
 <ul class="responsive-list">
   {{ range (.Site.RegularPages.ByDate) }}
-    <li><a href="/{{ .Params.slug }}/">{{ .Title }}</a></li>
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
   {{ end }}
 </ul>
