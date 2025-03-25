@@ -1,0 +1,12 @@
+[build]
+  command = "hugo"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.110.0"      # 必要なバージョンを指定
+  HUGO_EXTENDED = "true"        # SCSS/SASSなどを使う場合
+
+# プレビュー用などコンテキストを分けたい場合は以下のように:
+#[context.deploy-preview.environment]
+#  HUGO_VERSION = "0.110.0"
+#  HUGO_EXTENDED = "true"
